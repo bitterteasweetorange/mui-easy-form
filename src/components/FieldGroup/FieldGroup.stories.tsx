@@ -5,6 +5,7 @@ import { Meta, StoryObj } from '@storybook/react'
 import { useForm } from 'react-hook-form'
 import { FieldGroup, FieldGroupProps } from '.'
 import { ChoiceShape, MockShape, choiceOptions } from '../../helpers/mockData'
+import { MockObject, mockObjectNodes } from '../IO/CascaderIO/mock'
 
 const meta: Meta = {
   title: 'FieldGroup',
@@ -23,7 +24,7 @@ const Template = () => {
   return (
     <form
       noValidate
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
         console.log(data)
       })}
     >
@@ -57,7 +58,7 @@ const Template = () => {
             condition: {
               watch,
               fieldName: 'optional',
-              is: (fieldValue) => !!fieldValue,
+              is: fieldValue => !!fieldValue,
             },
             sx: {
               gridColumn: 'auto / span 2',
@@ -148,6 +149,14 @@ const Template = () => {
             componentType: 'SLIDER',
             name: 'age',
             label: 'slider',
+            required: true,
+          },
+          {
+            componentType: 'CASCADER',
+            nodes: mockObjectNodes,
+            isEqual: (a: MockObject, b: MockObject) => a.id === b.id,
+            name: 'cascader',
+            label: 'cascader',
             required: true,
           },
         ]}

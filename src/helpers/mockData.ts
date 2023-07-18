@@ -1,3 +1,5 @@
+import { MockObject } from 'src/components/IO/CascaderIO/mock'
+
 export type ChoiceShape = {
   id: number
   code: string
@@ -29,4 +31,5 @@ export type MockShape = {
   optional?: boolean
   choice: ChoiceShape
   multipleChoice: ChoiceShape[]
+  cascader?: MockObject
 }

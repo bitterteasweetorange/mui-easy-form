@@ -1,8 +1,10 @@
-import { Box, Button } from '@mui/material'
+import { Box, Button, Chip } from '@mui/material'
 import { DateField, DateTimeField, TimeField } from '@mui/x-date-pickers'
 import { Meta, StoryObj } from '@storybook/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ChoiceShape, MockShape, choiceOptions } from '../../helpers/mockData'
+import { MockObject, mockObjectNodes } from '../IO/CascaderIO/mock'
+import { CascaderField } from './CascaderField'
 import { CheckboxField } from './CheckboxField'
 import { CheckboxGroupField } from './CheckboxGroupField'
 import { NumberField } from './NumberField'
@@ -20,6 +22,7 @@ const meta: Meta = {
 
 export default meta
 
+// eslint-disable-next-line
 type Story = StoryObj<any>
 
 const Template = () => {
@@ -30,7 +33,7 @@ const Template = () => {
     <FormProvider {...methods}>
       <form
         noValidate
-        onSubmit={handleSubmit((data) => {
+        onSubmit={handleSubmit(data => {
           console.log(data)
         })}
       >
@@ -75,6 +78,13 @@ const Template = () => {
             name="name.first"
           />
           <SliderField<MockShape> label="slider" required name="age" />
+          <CascaderField<MockShape, MockObject>
+            label="cascader"
+            required
+            name="cascader"
+            nodes={mockObjectNodes}
+            isEqual={(a, b) => a.id === b.id}
+          />
         </Box>
         <Box
           sx={{

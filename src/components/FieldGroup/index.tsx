@@ -11,6 +11,7 @@ import { merge } from 'lodash-es'
 import { useContext } from 'react'
 import { FieldValues, Path, UseFormReturn, UseFormWatch } from 'react-hook-form'
 import { EasyFormContext } from '../EasyFormContext'
+import { CascaderField, CascaderFieldProps } from '../Field/CascaderField'
 import { CheckboxField, CheckboxFieldProps } from '../Field/CheckboxField'
 import {
   CheckboxGroupField,
@@ -70,6 +71,7 @@ export type FieldItemProps<T extends FieldValues> =
   | DateTimeItem<T>
   | PasswordItem<T>
   | SliderItem<T>
+  | CascaderItem<T>
 
 type BaseFieldProps<T extends FieldValues> = {
   // conditional rendering
@@ -147,6 +149,11 @@ type SliderItem<T extends FieldValues> = {
 } & SliderFieldProps<T> &
   BaseFieldProps<T>
 
+type CascaderItem<T extends FieldValues> = {
+  componentType: 'CASCADER'
+} & CascaderFieldProps<T, any> &
+  BaseFieldProps<T>
+
 function FieldItem<T extends FieldValues>(props: FieldItemProps<T>) {
   // condition
   if (props.condition) {
@@ -190,6 +197,10 @@ function FieldItem<T extends FieldValues>(props: FieldItemProps<T>) {
       return <PasswordField {...(fieldProps as PasswordFieldProps<T>)} />
     case 'SLIDER':
       return <SliderField {...(fieldProps as SliderFieldProps<T>)} />
+    case 'CASCADER':
+      return (
+        <CascaderField {...(fieldProps as CascaderFieldProps<T, unknown>)} />
+      )
     default:
       console.error('componentType not supported yet', componentType)
       return null
