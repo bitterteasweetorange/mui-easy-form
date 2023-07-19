@@ -19,8 +19,9 @@ export function SelectField<T extends FieldValues, OptionT>(
 
   return (
     <SelectIO<OptionT>
-      {...(rawIOProps as any)}
+      {...rawIOProps}
       {...easyFormTheme.Text}
+      disableClearable={props.disableClearable}
       ioRef={rawIOProps.ref}
       ref={undefined}
     />

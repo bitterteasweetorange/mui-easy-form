@@ -1,4 +1,4 @@
-import { Box, Button, Chip } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { DateField, DateTimeField, TimeField } from '@mui/x-date-pickers'
 import { Meta, StoryObj } from '@storybook/react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -13,11 +13,11 @@ import { RadioGroupField } from './RadioGroupField'
 import { SelectField } from './SelectField'
 import { SliderField } from './SliderField'
 import { SwitchField } from './SwitchField'
-import { TextField } from './TextField'
+import { WordField } from './WordField'
 
 const meta: Meta = {
   title: 'Fields',
-  component: TextField,
+  component: WordField,
 }
 
 export default meta
@@ -33,12 +33,12 @@ const Template = () => {
     <FormProvider {...methods}>
       <form
         noValidate
-        onSubmit={handleSubmit(data => {
+        onSubmit={handleSubmit((data) => {
           console.log(data)
         })}
       >
         <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: '1fr 1fr' }}>
-          <TextField<MockShape> label="text" required name="name.first" />
+          <WordField<MockShape> label="text" required name="name.first" />
           <NumberField<MockShape> label="number" required name="age" />
           <SwitchField<MockShape> label="switch" required name="optional" />
           <CheckboxField<MockShape> label="checkbox" required name="optional" />

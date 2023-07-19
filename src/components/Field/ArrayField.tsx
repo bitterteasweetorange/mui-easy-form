@@ -19,9 +19,11 @@ import {
 } from 'react-hook-form'
 import { FieldGroup, FieldItemProps } from '../FieldGroup'
 
-type Compute<Res, Args> = Res | ((args: Args) => Res)
+type ResFunc<Res, Args> = (args: Args) => Res
+type Compute<Res, Args> = Res | ResFunc<Res, Args>
+
 function compute<Res, Args>(res: Compute<Res, Args>, args: Args): Res {
-  return typeof res === 'function' ? (res as any)(args) : res
+  return typeof res === 'function' ? (res as ResFunc<Res, Args>)(args) : res
 }
 
 export type ArrayFieldProps<
@@ -100,6 +102,7 @@ export function ArrayField<
                         sx={{
                           ...sxFieldGroup,
                         }}
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         control={control as any}
                         fields={compute(props.fields, { index }).map(
                           (field) => ({
@@ -142,6 +145,7 @@ export function ArrayField<
       {enableAdd && (
         <IconButton
           onClick={() => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             append(defaultValueForAppend ?? ({} as any))
           }}
           color="primary"

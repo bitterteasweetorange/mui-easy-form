@@ -4,19 +4,27 @@ import { IconButton } from '@mui/material'
 import InputAdornment from '@mui/material/InputAdornment'
 import { ForwardedRef, forwardRef } from 'react'
 import { useIO } from '../../useIO'
-import { TextIO, TextIOProps } from '../TextIO'
+import { WordIO, WordIOProps } from '../WordIO'
 
-export type PasswordIOProps = TextIOProps
+export type PasswordIOProps = WordIOProps
 
 /*
- * PasswordIO extends from TextIO
+ * PasswordIO has a button to toggle the visibility of the password.
+ *
+ * related components:
+ * - PasswordField: a uncontrolled PasswordIO for form
+ *
+ * It extends from WordIO, so you can use all WordIO props.
+ *
+ * For more info ,see:
+ * https://bitterteasweetorange.github.io/mui-easy-form?path=/docs/io-passwordio--docs
  **/
 export const PasswordIO = forwardRef(Base)
 function Base(props: PasswordIOProps, ref: ForwardedRef<HTMLDivElement>) {
   const showPassword = useIO(false)
 
   return (
-    <TextIO
+    <WordIO
       {...props}
       ref={ref}
       type={showPassword.value ? 'text' : 'password'}
@@ -25,7 +33,6 @@ function Base(props: PasswordIOProps, ref: ForwardedRef<HTMLDivElement>) {
         endAdornment: (
           <InputAdornment position="end">
             <IconButton
-              aria-label="toggle password visibility"
               onClick={() => {
                 showPassword.onChange((pre) => !pre)
               }}

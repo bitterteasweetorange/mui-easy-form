@@ -1,20 +1,26 @@
 import { isNil } from 'lodash-es'
 import { ForwardedRef, forwardRef } from 'react'
 import { ControlledProps } from '../../../helpers/types'
-import { TextIO, TextIOProps } from '../TextIO'
+import { WordIO, WordIOProps } from '../WordIO'
 
-export type NumberIOProps = Omit<TextIOProps, 'value' | 'onChange'> &
+export type NumberIOProps = Omit<WordIOProps, 'value' | 'onChange'> &
   ControlledProps<number>
 
 /*
- * NumberIO extends from TextIO, but numbers are allowed only.
+ * NumberIO extends from WordIO, but numbers are allowed only.
+ * related components:
+ *
+ * - NumberField: a uncontrolled NumberIO for form
+ *
+ *  * For more info ,see:
+ * https://bitterteasweetorange.github.io/mui-easy-form?path=/docs/io-numberio--docs
  **/
 export const NumberIO = forwardRef(Base)
 function Base(props: NumberIOProps, ref: ForwardedRef<HTMLDivElement>) {
   const { value, onChange, ...restProps } = props
 
   return (
-    <TextIO
+    <WordIO
       {...restProps}
       ref={ref}
       type="number"
@@ -25,5 +31,3 @@ function Base(props: NumberIOProps, ref: ForwardedRef<HTMLDivElement>) {
     />
   )
 }
-
-export type NumberEmptyValue = null

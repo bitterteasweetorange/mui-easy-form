@@ -1,15 +1,15 @@
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import { cy, it } from 'local-cypress'
-import { TextIO } from '.'
+import { WordIO } from '.'
 
 it('clearable when focus', () => {
   cy.mount(
-    <TextIO
+    <WordIO
       value={'11'}
       onChange={() => {
         console.log('default value', 11)
       }}
-    ></TextIO>,
+    ></WordIO>,
   )
   cy.get('input').focus()
   cy.get('svg').should('exist').should('have.attr', 'data-testid', 'ClearIcon')
@@ -17,12 +17,12 @@ it('clearable when focus', () => {
 
 it('clearable when hover', () => {
   cy.mount(
-    <TextIO
+    <WordIO
       value={'11'}
       onChange={() => {
         console.log('default value', 11)
       }}
-    ></TextIO>,
+    ></WordIO>,
   )
   // https://github.com/cypress-io/cypress/issues/10
   cy.get('input').trigger('mouseover')
@@ -31,13 +31,13 @@ it('clearable when hover', () => {
 
 it('disable clearable', () => {
   cy.mount(
-    <TextIO
+    <WordIO
       value={'11'}
       onChange={() => {
         console.log('default value', 11)
       }}
-      disableClearable
-    ></TextIO>,
+      clearable
+    ></WordIO>,
   )
   cy.get('input').focus()
   cy.should('not.have.attr', 'data-testid', 'ClearIcon')
@@ -45,13 +45,13 @@ it('disable clearable', () => {
 
 it('clearable when focus', () => {
   cy.mount(
-    <TextIO
+    <WordIO
       value={'11'}
       onChange={() => {
         console.log('default value', 11)
       }}
       clearIcon={<DeleteOutlineIcon />}
-    ></TextIO>,
+    ></WordIO>,
   )
   cy.get('input').focus()
   cy.get('svg')

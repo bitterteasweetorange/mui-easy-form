@@ -3,7 +3,7 @@ import { ForwardedRef, forwardRef } from 'react'
 import { ControlledProps } from '../../../helpers/types'
 
 export type DateIOProps = ControlledProps<number> &
-  Omit<DatePickerProps<number>, 'value' | 'onChange' | 'renderInput'>
+  Omit<DatePickerProps<number>, 'value' | 'onChange'>
 
 export const DateIO = forwardRef(Base)
 function Base(props: DateIOProps, ref: ForwardedRef<HTMLDivElement>) {

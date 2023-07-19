@@ -9,27 +9,43 @@ import { isNil } from 'lodash-es'
 import { ForwardedRef, ReactNode, forwardRef } from 'react'
 import { ControlledProps } from '../../../helpers/types'
 
-export type TextIOProps = ControlledProps<string> &
+export type WordIOProps = ControlledProps<string> &
   TextIOAdditionProps &
-  Omit<TextFieldProps, 'value' | 'onChange'>
+  Omit<TextFieldProps, 'value' | 'onChange' | 'defaultValue'>
 
-export const TextIO = forwardRef(Base)
-function Base(props: TextIOProps, ref: ForwardedRef<HTMLDivElement>) {
+/**
+ * WordIO let users enter and edit text.
+ *
+ * related components:
+ * - WordField: a uncontrolled WordIO for form
+ * - NumberIO: type=number
+ * - PasswordIO: type=password
+ *
+ * It extends from TextField, so you can use all TextField props except 'value', 'onChange' and 'defaultValue' because WordIO is a controlled component.
+ *
+ * It also has 2 addition props:
+ * - clearable: If true, the input shows a clear icon if the value is not empty.
+ * - clearIcon: The icon to display in place of the default clear icon.
+ *
+ * For more info ,see:
+ * https://bitterteasweetorange.github.io/mui-easy-form?path=/docs/io-wordio--docs
+ */
+export const WordIO = forwardRef(Base)
+function Base(props: WordIOProps, ref: ForwardedRef<HTMLDivElement>) {
   const {
     // controlled props
     value,
     onChange,
     // addition
     clearIcon = <ClearIcon fontSize="small" />,
-    disableClearable,
+    clearable,
     // TextField props
     ...rawProps
   } = props
 
   const { disabled } = rawProps
 
-  const hasClearIcon =
-    !disableClearable && !disabled && value !== '' && value !== null
+  const showClearIcon = clearable && !disabled && value !== '' && value !== null
 
   return (
     <TextField
@@ -45,7 +61,7 @@ function Base(props: TextIOProps, ref: ForwardedRef<HTMLDivElement>) {
         ...rawProps.InputProps,
         endAdornment: (
           <>
-            {hasClearIcon && (
+            {showClearIcon && (
               <ClearIconAdornment
                 clearIcon={clearIcon}
                 onClear={() => {
@@ -96,8 +112,7 @@ export type TextIOAdditionProps = {
    */
   clearIcon?: ReactNode
   /**
-   * @default: false
-   * If true, the input can't be cleared.
+   * If true, the input shows a clear icon if the value is not empty.
    */
-  disableClearable?: boolean
+  clearable?: boolean
 }

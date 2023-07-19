@@ -34,7 +34,7 @@ export type OptionsProps<T> = {
    *
    * if you set isOptionEqual as (option, value) => a.id === b.id, then the option with key 1 will be selected
    */
-  isOptionEqual?: (optionValue: T, value: any) => boolean
+  isOptionEqual?: (optionValue: T, value: T) => boolean
   /**
    * render the option
    */
@@ -47,7 +47,7 @@ export type OptionsProps<T> = {
 
 /**
  * wrapper for EasyFormFieldProps
- * 1. remove "value" and "onChange" from IO props
+ * 1. remove "value", "onChange", "defaultValue" from IO props
  * 2. add form field props
  */
 export type FieldWrapper<
@@ -55,11 +55,12 @@ export type FieldWrapper<
     helperText?: ReactNode
   },
   T extends FieldValues,
-> = Omit<RawIOProps, 'value' | 'onChange'> & {
+> = Omit<RawIOProps, 'value' | 'onChange' | 'defaultValue'> & {
   required?: boolean
   control?: UseFormReturn<T>['control']
   name: Path<T>
   rules?: UseControllerProps['rules']
+  // FIXME: remove?
   defaultValue?: any
 }
 

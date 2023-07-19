@@ -15,7 +15,7 @@ const meta: Meta = {
   },
   parameters: {
     controls: {
-      include: ['value', 'onChange', 'clearIcon', 'disableClearable'],
+      include: ['value', 'onChange', 'clearIcon', 'clearable'],
     },
   },
 }
@@ -24,7 +24,7 @@ export default meta
 type Story = StoryObj<PasswordIOProps>
 
 const Template = (args: PasswordIOProps) => {
-  const [value, onChange] = useState<string | null>('123')
+  const [value, onChange] = useState<string | null>('init value')
   return <PasswordIO {...args} value={value} onChange={onChange} />
 }
 

@@ -1,0 +1,29 @@
+import { Canvas, Meta } from '@storybook/blocks'
+import * as Stories from './index.stories'
+
+<Meta of={Stories} />
+
+# CascaderIO
+
+CascaderIO let users select a value from a set of assocaiaed values.
+
+## Features
+
+- filter nodes by keyword
+- highlight the keyword
+
+<Canvas of={Stories.Default} />
+
+- if `typeof value === 'string'` or `typeof value === 'number'`, value will be used as label
+- if value's type is `{label:string}`, label will be used as label
+- otherw, you shoule privide a `getOptionLabel` prop to decide label's display
+
+<Canvas of={Stories.GetNodeLabel} />
+<Canvas of={Stories.RenderNode} />
+<Canvas of={Stories.Object} />
+
+# Related Components
+
+- [ CascaderField ](https://bitterteasweetorange.github.io/mui-easy-form?path=/story/fields--default): a uncontrolled CascaderIO for form
+
+- [Cascader](https://github.com/bitterteasweetorange/mui-easy-cascader): Use without input

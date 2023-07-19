@@ -15,7 +15,7 @@ const meta: Meta = {
   },
   parameters: {
     controls: {
-      include: ['value', 'onChange', 'clearIcon', 'disableClearable'],
+      include: ['value', 'onChange', 'clearIcon', 'clearable'],
     },
   },
 }
@@ -24,7 +24,7 @@ export default meta
 type Story = StoryObj<NumberIOProps>
 
 const Template = (args: NumberIOProps) => {
-  const [value, onChange] = useState<number | null>(null)
+  const [value, onChange] = useState<number | null>(100)
   return <NumberIO {...args} value={value} onChange={onChange} />
 }
 

@@ -31,7 +31,7 @@ export default meta
 type Story = StoryObj<DateIOProps>
 
 const Template = (args: DateIOProps) => {
-  const [value, onChange] = useState<number | null>(null)
+  const [value, onChange] = useState<number | null>(new Date().getTime())
   return (
     <Stack>
       <DateIO {...args} label="DateIO" value={value} onChange={onChange} />

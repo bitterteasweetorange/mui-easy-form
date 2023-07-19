@@ -23,7 +23,7 @@ import { RadioGroupField, RadioGroupFieldProps } from '../Field/RadioGroupField'
 import { SelectField, SelectFieldProps } from '../Field/SelectField'
 import { SliderField, SliderFieldProps } from '../Field/SliderField'
 import { SwitchField, SwitchFieldProps } from '../Field/SwitchField'
-import { TextField, TextFieldProps } from '../Field/TextField'
+import { WordField, WordFieldProps } from '../Field/WordField'
 
 export type FieldGroupProps<T extends FieldValues> = {
   fields: FieldItemProps<T>[]
@@ -50,6 +50,7 @@ export function FieldGroup<T extends FieldValues>({
         // use FieldGroup's control
         <FieldItem<T>
           control={control}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           {...(field as any)}
           key={field.name + index}
         />
@@ -74,17 +75,26 @@ export type FieldItemProps<T extends FieldValues> =
   | CascaderItem<T>
 
 type BaseFieldProps<T extends FieldValues> = {
-  // conditional rendering
   condition?: {
+    /**
+     * watch function provided by useForm
+     */
     watch: UseFormWatch<T>
+    /**
+     * field name to watch
+     */
     fieldName: Path<T>
+    /**
+     * display the field when the condition is true
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     is: (fieldValue: any) => boolean
   }
 }
 
 type TextItem<T extends FieldValues> = {
   componentType: 'TEXT'
-} & TextFieldProps<T> &
+} & WordFieldProps<T> &
   BaseFieldProps<T>
 
 type NumberItem<T extends FieldValues> = {
@@ -104,16 +114,19 @@ type CheckboxItem<T extends FieldValues> = {
 
 type RadioGroupItem<T extends FieldValues> = {
   componentType: 'RADIO-GROUP'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } & RadioGroupFieldProps<T, any> &
   BaseFieldProps<T>
 
 type CheckboxGroupItem<T extends FieldValues> = {
   componentType: 'CHECKBOX-GROUP'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } & CheckboxGroupFieldProps<T, any> &
   BaseFieldProps<T>
 
 type SelectItem<T extends FieldValues> = {
   componentType: 'SELECT'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } & SelectFieldProps<T, any> &
   BaseFieldProps<T>
 
@@ -151,6 +164,7 @@ type SliderItem<T extends FieldValues> = {
 
 type CascaderItem<T extends FieldValues> = {
   componentType: 'CASCADER'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } & CascaderFieldProps<T, any> &
   BaseFieldProps<T>
 
@@ -166,7 +180,7 @@ function FieldItem<T extends FieldValues>(props: FieldItemProps<T>) {
   const { componentType, ...fieldProps } = props
   switch (componentType) {
     case 'TEXT':
-      return <TextField {...(fieldProps as TextFieldProps<T>)} />
+      return <WordField {...(fieldProps as WordFieldProps<T>)} />
     case 'NUMBER':
       return <NumberField {...(fieldProps as NumberFieldProps<T>)} />
     case 'SWITCH':

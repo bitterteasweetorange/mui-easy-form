@@ -1,6 +1,4 @@
-
 import { Box, Chip } from '@mui/material'
-import type { Meta } from '@storybook/react'
 import { useState } from 'react'
 import { CascaderIO } from '.'
 import { MockObject, mockObjectNodes } from './mock'
@@ -8,30 +6,88 @@ import { MockObject, mockObjectNodes } from './mock'
 const meta = {
   title: 'IO/CascaderIO',
   component: CascaderIO,
-} satisfies Meta<typeof CascaderIO>
+}
 
 export default meta
 
-export const Defalut = () => {
-  const [value, onChange] = useState<MockObject | null>({
-    id: 2,
-    label: 'children-1',
-    age: 10,
-  })
+export const Default = () => {
+  const [value, onChange] = useState<string | null>('0-1')
   return (
-    <CascaderIO<MockObject>
-      nodes={mockObjectNodes}
-      isEqual={(a, b) => a.id === b.id}
-      getNodeLabel={(node) =>
-        `${node.label}${node.age ? '(' + node.age + ')' : ''}`
-      }
+    <CascaderIO<string>
+      nodes={[
+        {
+          value: '0',
+          children: [
+            {
+              value: '0-0',
+            },
+            {
+              value: '0-1',
+            },
+          ],
+        },
+        {
+          value: '1',
+        },
+      ]}
       value={value}
       onChange={onChange}
-      helperText="helperText"
-      label="label"
-      error={false}
-      required
-      disabled={false}
+      label="string"
+    />
+  )
+}
+
+export const GetNodeLabel = () => {
+  const [value, onChange] = useState<string | null>('0-1')
+  return (
+    <CascaderIO<string>
+      getNodeLabel={(node) => `prefix-${node}`}
+      nodes={[
+        {
+          value: '0',
+          children: [
+            {
+              value: '0-0',
+            },
+            {
+              value: '0-1',
+            },
+          ],
+        },
+        {
+          value: '1',
+        },
+      ]}
+      value={value}
+      onChange={onChange}
+      label="getNodeLabel"
+    />
+  )
+}
+
+export const RenderNode = () => {
+  const [value, onChange] = useState<string | null>('0-1')
+  return (
+    <CascaderIO<string>
+      nodes={[
+        {
+          value: '0',
+          children: [
+            {
+              value: '0-0',
+            },
+            {
+              value: '0-1',
+            },
+          ],
+        },
+        {
+          value: '1',
+        },
+      ]}
+      value={value}
+      onChange={onChange}
+      label="renderNode"
       renderNode={(Label, { value }) => (
         <Box
           sx={{
@@ -41,16 +97,33 @@ export const Defalut = () => {
           }}
         >
           {Label}
-          {value.age && (
+          {value.includes('1') && (
             <Chip
+              color="success"
               variant="outlined"
               size="small"
-              label={value.age}
-              color={value.age > 18 ? 'success' : 'error'}
+              label="tag 1"
             />
           )}
         </Box>
       )}
+    />
+  )
+}
+
+export const Object = () => {
+  const [value, onChange] = useState<MockObject | null>({
+    id: 2,
+    label: 'children-1',
+    age: 10,
+  })
+  return (
+    <CascaderIO<MockObject>
+      nodes={mockObjectNodes}
+      isEqual={(a, b) => a.id === b.id}
+      value={value}
+      onChange={onChange}
+      label="object"
     />
   )
 }

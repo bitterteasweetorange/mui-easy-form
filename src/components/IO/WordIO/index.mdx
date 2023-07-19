@@ -1,0 +1,32 @@
+import { Canvas, Meta } from '@storybook/blocks'
+import * as Stories from './index.stories'
+
+<Meta of={Stories} />
+
+# WordIO
+
+WordIO let users enter and edit text.
+
+It extends from TextField, so you can use all TextField props except 'value', 'onChange' and 'defaultValue' because WordIO is a controlled component.
+
+<Canvas of={Stories.Default} />
+
+# Additional Props
+
+## clearable
+
+If true, the input shows a clear icon if the value is not empty.
+
+<Canvas of={Stories.Clearable} />
+
+## clearIcon
+
+The icon to display in place of the default clear icon.
+
+<Canvas of={Stories.ClearIcon} />
+
+# Related Components
+
+- [ WordField ](https://bitterteasweetorange.github.io/mui-easy-form?path=/story/fields--default): a uncontrolled WordIO for form
+- [ NumberIO ](https://bitterteasweetorange.github.io/mui-easy-form?path=/story/io-numberio--default): type=number
+- [PasswordIO](https://bitterteasweetorange.github.io/mui-easy-form?path=/story/io-passwordio--default): type=password
