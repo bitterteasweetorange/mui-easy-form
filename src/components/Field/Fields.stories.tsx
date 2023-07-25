@@ -1,5 +1,4 @@
 import { Box, Button } from '@mui/material'
-import { DateField, DateTimeField, TimeField } from '@mui/x-date-pickers'
 import { Meta, StoryObj } from '@storybook/react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ChoiceShape, MockShape, choiceOptions } from '../../helpers/mockData'
@@ -7,12 +6,15 @@ import { MockObject, mockObjectNodes } from '../IO/CascaderIO/mock'
 import { CascaderField } from './CascaderField'
 import { CheckboxField } from './CheckboxField'
 import { CheckboxGroupField } from './CheckboxGroupField'
+import { DateField } from './DateField'
+import { DateTimeField } from './DateTimeField'
 import { NumberField } from './NumberField'
 import { PasswordField } from './PasswordField'
 import { RadioGroupField } from './RadioGroupField'
 import { SelectField } from './SelectField'
 import { SliderField } from './SliderField'
 import { SwitchField } from './SwitchField'
+import { TimeField } from './TimeField'
 import { WordField } from './WordField'
 
 const meta: Meta = {
@@ -26,14 +28,19 @@ export default meta
 type Story = StoryObj<any>
 
 const Template = () => {
-  const methods = useForm<MockShape>()
+  const methods = useForm<MockShape>({
+    defaultValues: {
+      birthday: new Date().getTime(),
+    },
+  })
   const { reset, handleSubmit } = methods
 
   return (
     <FormProvider {...methods}>
       <form
         noValidate
-        onSubmit={handleSubmit((data) => {
+        onSubmit={handleSubmit(data => {
+          // eslint-disable-next-line
           console.log(data)
         })}
       >

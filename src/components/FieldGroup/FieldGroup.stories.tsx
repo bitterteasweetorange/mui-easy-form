@@ -24,7 +24,8 @@ const Template = () => {
   return (
     <form
       noValidate
-      onSubmit={handleSubmit((data) => {
+      onSubmit={handleSubmit(data => {
+        // eslint-disable-next-line
         console.log(data)
       })}
     >
@@ -58,7 +59,7 @@ const Template = () => {
             condition: {
               watch,
               fieldName: 'optional',
-              is: (fieldValue) => !!fieldValue,
+              is: fieldValue => !!fieldValue,
             },
             sx: {
               gridColumn: 'auto / span 2',
