@@ -39,16 +39,32 @@ const Template = () => {
     <FormProvider {...methods}>
       <form
         noValidate
-        onSubmit={handleSubmit(data => {
+        onSubmit={handleSubmit((data) => {
           // eslint-disable-next-line
           console.log(data)
         })}
       >
         <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: '1fr 1fr' }}>
-          <WordField<MockShape> label="text" required name="name.first" />
-          <NumberField<MockShape> label="number" required name="age" />
-          <SwitchField<MockShape> label="switch" required name="optional" />
-          <CheckboxField<MockShape> label="checkbox" required name="optional" />
+          <WordField<MockShape>
+            label="text"
+            required
+            name="name.first"
+          />
+          <NumberField<MockShape>
+            label="number"
+            required
+            name="age"
+          />
+          <SwitchField<MockShape>
+            label="switch"
+            required
+            name="optional"
+          />
+          <CheckboxField<MockShape>
+            label="checkbox"
+            required
+            name="optional"
+          />
           <RadioGroupField<MockShape, ChoiceShape>
             label="radio group"
             name="choice"
@@ -76,21 +92,37 @@ const Template = () => {
             options={choiceOptions}
             required
           />
-          <DateField<MockShape> label="date" required name="birthday" />
-          <TimeField<MockShape> label="time" required name="birthday" />
-          <DateTimeField<MockShape> label="datetime" required name="birthday" />
+          <DateField<MockShape>
+            label="date"
+            required
+            name="birthday"
+          />
+          <TimeField<MockShape>
+            label="time"
+            required
+            name="birthday"
+          />
+          <DateTimeField<MockShape>
+            label="datetime"
+            required
+            name="birthday"
+          />
           <PasswordField<MockShape>
             label="password"
             required
             name="name.first"
           />
-          <SliderField<MockShape> label="slider" required name="age" />
+          <SliderField<MockShape>
+            label="slider"
+            required
+            name="age"
+          />
           <CascaderField<MockShape, MockObject>
             label="cascader"
             required
             name="cascader"
-            nodes={mockObjectNodes}
-            isEqual={(a, b) => a.id === b.id}
+            data={mockObjectNodes}
+            getNodeLabel={(node) => node.name}
           />
         </Box>
         <Box

@@ -3,6 +3,13 @@ Combine Material UI and React Hook Form
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 ![TEST](https://github.com/bitterteasweetorange/mui-easy-form/actions/workflows/publish.yml/badge.svg)
 
+## Features
+
+- typescript support
+- native support with material-ui & react-hook-form
+- extend material-ui components
+- provide uncontrolled & controlled components
+
 ## Install
 
 - `npm install mui-easy-form`
@@ -57,3 +64,17 @@ function App() {
 ## Documentation
 
 [demo](https://bitterteasweetorange.github.io/mui-easy-form/?path=/story/fieldgroup--default)
+
+## Component List
+
+- [x] word
+- [x] password
+- [x] number
+
+## TODO
+
+- [ ] codesandbox
+- [ ] i18n
+- [ ] reduce size
+- [ ] FAQ: "XXIO" difference with "XXField"?
+- [ ] eslint

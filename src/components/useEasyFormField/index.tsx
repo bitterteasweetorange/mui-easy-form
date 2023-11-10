@@ -1,7 +1,6 @@
-import { ReactNode, useContext } from 'react'
+import { ReactNode } from 'react'
 import { ErrorOption, FieldValues, get, useController } from 'react-hook-form'
 import { FieldWrapper } from '../../helpers/types'
-import { EasyFormContext } from '../EasyFormContext'
 
 export function useEasyFormField<
   RawIOProps extends {
@@ -13,8 +12,6 @@ export function useEasyFormField<
 ): {
   rawIOProps: RawIOProps
 } {
-  const easyFormTheme = useContext(EasyFormContext)
-
   const { control, name, rules, defaultValue, ...rawIOProps } = props
   const { required, helperText } = rawIOProps
 
@@ -27,7 +24,7 @@ export function useEasyFormField<
     rules: {
       ...rules,
       required: rules?.required || {
-        message: easyFormTheme.errorMessage?.required,
+        message: 'required',
         value: !!required,
       },
     },
