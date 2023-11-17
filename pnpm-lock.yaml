@@ -155,8 +155,8 @@ devDependencies:
     specifier: ^1.2.6
     version: 1.2.6
   mui-easy-cascader:
-    specifier: ^0.3.4
-    version: 0.3.4(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@mui/material@5.10.13)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.3.5
+    version: 0.3.5(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@mui/material@5.10.13)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
   prop-types:
     specifier: ^15.8.1
     version: 15.8.1
@@ -5412,6 +5412,7 @@ packages:
   /binary-extensions@2.2.0:
     resolution: {integrity: sha1-dfUC7q+f/eQvyYgpZFvk6na9ni0=}
     engines: {node: '>=8'}
+    requiresBuild: true
     dev: true
 
   /bl@4.1.0:
@@ -7726,6 +7727,7 @@ packages:
   /is-binary-path@2.1.0:
     resolution: {integrity: sha1-6h9/O4DwZCNug0cPhsCcJU+0Wwk=}
     engines: {node: '>=8'}
+    requiresBuild: true
     dependencies:
       binary-extensions: 2.2.0
     dev: true
@@ -8692,8 +8694,8 @@ packages:
     resolution: {integrity: sha1-V0yBOM4dK1hh8LRFedut1gxmFbI=}
     dev: true
 
-  /mui-easy-cascader@0.3.4(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@mui/material@5.10.13)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-yxjTzA/8hqmVc6+Mc+p7BjQ+Z5CETZMBJF07CpTcml/6lkDdb9VQCAjQANUlv0vcnFSoDGAwrLgkQp3tGDj13w==}
+  /mui-easy-cascader@0.3.5(@emotion/react@11.10.5)(@emotion/styled@11.10.5)(@mui/material@5.10.13)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-dNG0jdYOv7x1JhH28LgpGnnKE9WnGPbC5nYXZDPlYiyruGDLCaWePNm9YZqSQ1pBvBPkymUqps+KTPu8XSTaqQ==}
     peerDependencies:
       '@emotion/react': '>=11'
       '@emotion/styled': '>=11'
@@ -9652,6 +9654,7 @@ packages:
   /readdirp@3.6.0:
     resolution: {integrity: sha1-dKNwvYVxFuJFspzJc0DNQxoCpsc=}
     engines: {node: '>=8.10.0'}
+    requiresBuild: true
     dependencies:
       picomatch: 2.3.1
     dev: true

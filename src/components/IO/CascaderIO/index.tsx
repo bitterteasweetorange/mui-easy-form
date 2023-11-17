@@ -14,5 +14,7 @@ export const CascaderIO = EasyCascaderInput
  *  * For more info ,see:
  * https://bitterteasweetorange.github.io/mui-easy-form?path=/docs/io-cascaderio--docs
  **/
-export type CascaderIOProps<T extends EasyCascaderBaseNode> =
-  EasyCascaderInputProps<T>
+export type CascaderIOProps<
+  T extends EasyCascaderBaseNode,
+  IdAsValue extends boolean = false,
+> = EasyCascaderInputProps<T, IdAsValue>

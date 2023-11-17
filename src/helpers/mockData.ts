@@ -34,4 +34,5 @@ export type MockShape = {
   multipleChoice: ChoiceShape[]
   multipleChoiceId: number[]
   cascader?: MockObject
+  cascaderId?: number[]
 }

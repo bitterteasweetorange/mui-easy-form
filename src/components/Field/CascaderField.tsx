@@ -1,18 +1,26 @@
+import {
+  EasyCascaderBaseNode,
+  EasyCascaderInput,
+  EasyCascaderInputProps,
+} from 'mui-easy-cascader'
 import { FieldValues } from 'react-hook-form'
 import { FieldWrapper } from '../../helpers/types'
-import { CascaderIO, CascaderIOProps } from '../IO'
 import { useEasyFormField } from '../useEasyFormField'
-import { EasyCascaderBaseNode } from 'mui-easy-cascader'
 
 export type CascaderFieldProps<
   T extends FieldValues,
-  Shape extends EasyCascaderBaseNode,
-> = FieldWrapper<CascaderIOProps<Shape>, T>
+  OptionT extends EasyCascaderBaseNode,
+  IdAsValue extends boolean = false,
+> = FieldWrapper<EasyCascaderInputProps<OptionT, IdAsValue>, T>
 
 export function CascaderField<
   T extends FieldValues,
-  Shape extends EasyCascaderBaseNode,
->(props: CascaderFieldProps<T, Shape>) {
-  const { rawIOProps } = useEasyFormField<CascaderIOProps<Shape>, T>(props)
-  return <CascaderIO {...rawIOProps} />
+  OptionT extends EasyCascaderBaseNode,
+  IdAsValue extends boolean = false,
+>(props: CascaderFieldProps<T, OptionT, IdAsValue>) {
+  const { rawIOProps } = useEasyFormField<
+    EasyCascaderInputProps<OptionT, IdAsValue>,
+    T
+  >(props)
+  return <EasyCascaderInput<OptionT, IdAsValue> {...(rawIOProps as any)} />
 }

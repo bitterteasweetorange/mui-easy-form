@@ -133,6 +133,9 @@ const Template = () => {
             label="slider"
             required
             name="age"
+            sx={{
+              gridColumn: '1 / span 2',
+            }}
           />
           <CascaderField<MockShape, MockObject>
             label="cascader"
@@ -140,6 +143,14 @@ const Template = () => {
             name="cascader"
             data={mockObjectNodes}
             getNodeLabel={(node) => node.name}
+          />
+          <CascaderField<MockShape, MockObject, true>
+            label="cascader id as value"
+            required
+            name="cascaderId"
+            data={mockObjectNodes}
+            getNodeLabel={(node) => node.name}
+            idAsValue
           />
         </Box>
         <Box
