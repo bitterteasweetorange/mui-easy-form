@@ -72,7 +72,10 @@ export const Single = () => {
         renderOption={(value: ChoiceShape) => (
           <Box>
             <Typography>{value.label}</Typography>
-            <Typography color="textSecondary" variant="caption">
+            <Typography
+              color="textSecondary"
+              variant="caption"
+            >
               {value.code}
             </Typography>
           </Box>
@@ -137,14 +140,14 @@ export const Multiple = () => {
       <Typography color="warning.main">
         {JSON.stringify(valueChoice)}
       </Typography>
-      <SelectIO<ChoiceShape>
+      <SelectIO<ChoiceShape, true>
         value={valueChoice}
         onChange={onChangeChoice}
         label="select choice"
         options={choiceOptions}
         multiple
       />
-      <SelectIO<ChoiceShape>
+      <SelectIO<ChoiceShape, true>
         value={valueChoice}
         onChange={onChangeChoice}
         label="search choice"
@@ -152,7 +155,7 @@ export const Multiple = () => {
         search
         multiple
       />
-      <SelectIO<ChoiceShape>
+      <SelectIO<ChoiceShape, true>
         value={valueChoice}
         onChange={onChangeChoice}
         label="get option label"
@@ -161,7 +164,7 @@ export const Multiple = () => {
         getOptionLabel={(option) => `${option.label} - ${option.code}`}
         multiple
       />
-      <SelectIO<ChoiceShape>
+      <SelectIO<ChoiceShape, true>
         value={valueChoice}
         onChange={onChangeChoice}
         label="render option"
@@ -170,14 +173,17 @@ export const Multiple = () => {
         renderOption={(value: ChoiceShape) => (
           <Box>
             <Typography>{value.label}</Typography>
-            <Typography color="textSecondary" variant="caption">
+            <Typography
+              color="textSecondary"
+              variant="caption"
+            >
               {value.code}
             </Typography>
           </Box>
         )}
         multiple
       />
-      <SelectIO<ChoiceShape>
+      <SelectIO<ChoiceShape, true>
         value={valueChoice2}
         onChange={onChangeChoice2}
         label="is option equal"
@@ -191,7 +197,7 @@ export const Multiple = () => {
       <Typography color="warning.main">
         {JSON.stringify(valueChoice3)}
       </Typography>
-      <SelectIO<ChoiceShape, false, number>
+      <SelectIO<ChoiceShape, true, number>
         value={valueChoice3}
         onChange={onChangeChoice3}
         label="get option to value"

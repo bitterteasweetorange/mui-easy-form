@@ -30,6 +30,8 @@ export type MockShape = {
   }
   optional?: boolean
   choice: ChoiceShape
+  choiceId: number
   multipleChoice: ChoiceShape[]
+  multipleChoiceId: number[]
   cascader?: MockObject
 }

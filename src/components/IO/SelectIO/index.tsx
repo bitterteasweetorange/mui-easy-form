@@ -13,12 +13,8 @@ import { useMemo } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { ControlledProps, OptionsProps } from '../../../helpers/types'
 
-type Base<
-  OptionItem,
-  Multiple extends boolean = false,
-  Value = OptionItem,
-> = Omit<
-  AutocompleteProps<OptionItem, Multiple, undefined, undefined>,
+type Base<OptionT, Multiple extends boolean = false, Value = OptionT> = Omit<
+  AutocompleteProps<OptionT, Multiple, undefined, undefined>,
   | 'value'
   | 'onChange'
   | 'multiple'
@@ -35,51 +31,57 @@ type Base<
    * value: { id: 1 }
    * option: { id: 1, name: 'a', age: 18 }
    */
-  isOptionEqual?: (
-    optionValue: OptionItem,
-    value: DeepPartial<Value>,
-  ) => boolean
+  isOptionEqual?: (optionValue: OptionT, value: DeepPartial<Value>) => boolean
   checkbox?: boolean
   search?: boolean
   /**
-   * If typeof value !== typeof option, you should provide this function,
+   *  Example:
+   *  options: [{ id: 1, name: 'name1', age: 18 }]
    *
-   * Example:
-   * value: 1
-   * option: { id: 1, name: 'a', age: 18 }
-   */
-  getOption2Value?: (option: OptionItem) => Value
-} & Pick<OptionsProps<OptionItem>, 'renderOption'>
+   *  approch1:
+   *  - value: { id: 1, name: 'name1', age: 18 }
+   *  - isOptionEqual={(option, value) => option.id === value.id}
+   *
+   *  approch2:
+   *  - value: 1
+   *  - getOption2Value={(option) => option.id}
+   *
+   *  choose different approch according to your data structure
+   **/
+  getOption2Value?: (option: OptionT) => Value
+} & Pick<OptionsProps<OptionT>, 'renderOption'>
 
 type Single<
-  OptionItem,
+  OptionT,
   Multiple extends boolean,
-  Value = OptionItem,
+  Value = OptionT,
 > = ControlledProps<Value> &
-  Base<OptionItem, Multiple, Value> & {
+  Base<OptionT, Multiple, Value> & {
     multiple?: false
   }
 
 type Multi<
-  OptionItem,
+  OptionT,
   Multiple extends boolean,
-  Value = OptionItem,
+  Value = OptionT,
 > = ControlledProps<Value[]> &
-  Base<OptionItem, Multiple, Value> & {
+  Base<OptionT, Multiple, Value> & {
     multiple: true
   }
 
 export type SelectIOProps<
-  OptionItem,
+  OptionT,
   Multiple extends boolean = false,
-  Value = OptionItem,
-> = Multi<OptionItem, Multiple, Value> | Single<OptionItem, Multiple, Value>
+  Value = OptionT,
+> = Multiple extends true
+  ? Multi<OptionT, Multiple, Value>
+  : Single<OptionT, Multiple, Value>
 
 export function SelectIO<
-  OptionItem,
+  OptionT,
   Multiple extends boolean = false,
-  Value = OptionItem,
->(props: SelectIOProps<OptionItem, Multiple, Value>) {
+  Value = OptionT,
+>(props: SelectIOProps<OptionT, Multiple, Value>) {
   const {
     // form control
     label,
@@ -125,7 +127,7 @@ export function SelectIO<
   }, [options, value, isOptionEqual])
 
   return (
-    <Autocomplete<OptionItem, Multiple>
+    <Autocomplete<OptionT, Multiple>
       {...rawProps}
       ref={ioRef}
       options={options}
@@ -151,10 +153,8 @@ export function SelectIO<
       onChange={(_, newValue) => {
         if (getOption2Value) {
           const res = multiple
-            ? (newValue as unknown as OptionItem[])?.map((x) =>
-                getOption2Value(x),
-              )
-            : getOption2Value(newValue as unknown as OptionItem)
+            ? (newValue as unknown as OptionT[])?.map((x) => getOption2Value(x))
+            : getOption2Value(newValue as unknown as OptionT)
           onChange(res as any)
         } else {
           onChange(newValue as any)
@@ -177,7 +177,7 @@ export function SelectIO<
       getOptionLabel={
         getOptionLabel
           ? getOptionLabel
-          : (option: OptionItem) =>
+          : (option: OptionT) =>
               typeof option === 'number'
                 ? option.toString()
                 : typeof option === 'object'
@@ -187,7 +187,10 @@ export function SelectIO<
       renderOption={
         checkbox || renderOption
           ? (props, option, state) => (
-              <Box component="li" {...props}>
+              <Box
+                component="li"
+                {...props}
+              >
                 {checkbox && (
                   <Checkbox
                     icon={<CheckBoxOutlineBlankIcon fontSize="small" />}

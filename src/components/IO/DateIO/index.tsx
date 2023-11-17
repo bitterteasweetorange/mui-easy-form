@@ -7,5 +7,11 @@ export type DateIOProps = ControlledProps<number> &
 
 export const DateIO = forwardRef(Base)
 function Base(props: DateIOProps, ref: ForwardedRef<HTMLDivElement>) {
-  return <DatePicker ref={ref} views={['year', 'month', 'day']} {...props} />
+  return (
+    <DatePicker
+      ref={ref}
+      views={['year', 'month', 'day']}
+      {...props}
+    />
+  )
 }

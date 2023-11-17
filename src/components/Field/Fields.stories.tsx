@@ -84,13 +84,30 @@ const Template = () => {
             options={choiceOptions}
             required
           />
-          <SelectField<MockShape, ChoiceShape>
-            multiple={true}
+          <SelectField<MockShape, ChoiceShape, true>
+            multiple
             label="select multi"
             name="multipleChoice"
             search
             options={choiceOptions}
             required
+          />
+          <SelectField<MockShape, ChoiceShape, false, number>
+            label="select single map value"
+            name="choiceId"
+            search
+            options={choiceOptions}
+            required
+            getOption2Value={(option) => option.id}
+          />
+          <SelectField<MockShape, ChoiceShape, true, number>
+            multiple={true}
+            label="select multi map value"
+            name="multipleChoiceId"
+            search
+            options={choiceOptions}
+            required
+            getOption2Value={(option) => option.id}
           />
           <DateField<MockShape>
             label="date"
