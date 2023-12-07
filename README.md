@@ -44,17 +44,6 @@ function App() {
         required
         name="name.first"
       />
-      <FieldGroup<Shape>
-        control={control}
-        fields={[
-          {
-            componentType: 'TEXT',
-            label: 'text',
-            required: true,
-            name: 'name.last',
-          },
-        ]}
-      />
       <Button type="submit">submit</Button>
     </form>
   )
@@ -63,7 +52,7 @@ function App() {
 
 ## Documentation
 
-[demo](https://bitterteasweetorange.github.io/mui-easy-form/?path=/story/fieldgroup--default)
+[demo](https://bitterteasweetorange.github.io/mui-easy-form/?path=/story/fields--default)
 
 ## Component List
 
