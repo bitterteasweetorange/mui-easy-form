@@ -7,5 +7,20 @@ export type TimeIOProps = ControlledProps<number> &
 
 export const TimeIO = forwardRef(Base)
 function Base(props: TimeIOProps, ref: ForwardedRef<HTMLDivElement>) {
-  return <TimePicker {...props} ref={ref} />
+  const { label, required, helperText, error, disabled, ...datePickerProps } =
+    props
+  return (
+    <TimePicker
+      {...datePickerProps}
+      slotProps={{
+        textField: {
+          disabled,
+          error,
+          helperText,
+        },
+      }}
+      ref={ref}
+      label={required ? `${label} *` : label}
+    />
+  )
 }

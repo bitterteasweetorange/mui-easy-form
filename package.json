@@ -1,6 +1,6 @@
 {
   "name": "mui-easy-form",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/src/index.d.ts",

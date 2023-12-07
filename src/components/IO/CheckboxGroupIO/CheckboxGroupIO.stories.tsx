@@ -14,7 +14,13 @@ type Story = StoryObj<CheckboxGroupIOProps<string>>
 
 const Template = (args: CheckboxGroupIOProps<string>) => {
   const [value, onChange] = useState<string[] | null>(null)
-  return <CheckboxGroupIO<string> {...args} value={value} onChange={onChange} />
+  return (
+    <CheckboxGroupIO<string>
+      {...args}
+      value={value}
+      onChange={onChange}
+    />
+  )
 }
 
 export const Default: Story = {
@@ -65,7 +71,10 @@ export const RenderOption: StoryChoiceShape = {
     renderOption: (value: ChoiceShape) => (
       <Box>
         <Typography>{value.label}</Typography>
-        <Typography color="textSecondary" variant="caption">
+        <Typography
+          color="textSecondary"
+          variant="caption"
+        >
           {value.code}
         </Typography>
       </Box>
@@ -97,7 +106,11 @@ const IsOptionEqualTemplate = (args: CheckboxGroupIOProps<ChoiceShape>) => {
     },
   ] as ChoiceShape[])
   return (
-    <CheckboxGroupIO<ChoiceShape> {...args} value={value} onChange={onChange} />
+    <CheckboxGroupIO<ChoiceShape>
+      {...args}
+      value={value}
+      onChange={onChange}
+    />
   )
 }
 export const IsOptionEqual: StoryChoiceShape = {

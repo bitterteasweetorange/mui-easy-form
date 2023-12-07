@@ -7,11 +7,21 @@ export type DateIOProps = ControlledProps<number> &
 
 export const DateIO = forwardRef(Base)
 function Base(props: DateIOProps, ref: ForwardedRef<HTMLDivElement>) {
+  const { label, required, helperText, error, disabled, ...datePickerProps } =
+    props
   return (
     <DatePicker
+      {...datePickerProps}
+      slotProps={{
+        textField: {
+          disabled,
+          error,
+          helperText,
+        },
+      }}
       ref={ref}
       views={['year', 'month', 'day']}
-      {...props}
+      label={required ? `${label} *` : label}
     />
   )
 }

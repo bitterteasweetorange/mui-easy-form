@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { FieldValues } from 'react-hook-form'
 import { FieldWrapper } from '../../helpers/types'
 import { SelectIO, SelectIOProps } from '../IO'
@@ -22,6 +21,7 @@ export function SelectField<
     T
   >(props)
 
+  // FIXME:
   return (
     <SelectIO<OptionT, Multiple, ValueT>
       {...rawIOProps}

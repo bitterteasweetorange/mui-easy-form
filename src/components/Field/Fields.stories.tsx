@@ -28,11 +28,7 @@ export default meta
 type Story = StoryObj<any>
 
 const Template = () => {
-  const methods = useForm<MockShape>({
-    defaultValues: {
-      birthday: new Date().getTime(),
-    },
-  })
+  const methods = useForm<MockShape>()
   const { reset, handleSubmit } = methods
 
   return (
@@ -40,7 +36,6 @@ const Template = () => {
       <form
         noValidate
         onSubmit={handleSubmit((data) => {
-          // eslint-disable-next-line
           console.log(data)
         })}
       >
@@ -110,6 +105,7 @@ const Template = () => {
             getOption2Value={(option) => option.id}
           />
           <DateField<MockShape>
+            helperText="date"
             label="date"
             required
             name="birthday"
