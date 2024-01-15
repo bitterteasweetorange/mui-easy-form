@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { FieldValues } from 'react-hook-form'
 import { FieldWrapper } from '../../helpers/types'
 import { NumberIO, NumberIOProps } from '../IO'
